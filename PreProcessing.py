@@ -15,7 +15,6 @@ for i in range(0,files.__len__()-1,1):
     img = orig
     deskew_obj = Deskew(img,'Yes', 0)
     image = deskew_obj.run()
-    image = equalizeHist(image)
     _,image = threshold(image,130,255,THRESH_BINARY)
     _,thresh = threshold(image,1,255,THRESH_BINARY)
     contours = findContours(image,RETR_EXTERNAL,CHAIN_APPROX_SIMPLE)
@@ -23,6 +22,7 @@ for i in range(0,files.__len__()-1,1):
     x,y,w,h = boundingRect(cnt)
     image = image[y:y+h,x:x+w]
 
+    image = equalizeHist(image)
     #if(detectBlur(img, 100)):
         #print("Blurred Image")
     blur = medianBlur(image,3)
